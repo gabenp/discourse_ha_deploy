@@ -1,0 +1,5 @@
+#cloud-config
+write_files:
+  - path: /gabe-test
+    content: |
+      gabe-test
