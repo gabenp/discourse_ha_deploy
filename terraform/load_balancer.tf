@@ -15,5 +15,11 @@ resource "digitalocean_loadbalancer" "discourse" {
     protocol = "tcp"
   }
 
+  sticky_sessions {
+    type               = "cookies"
+    cookie_name        = "DOLBSESS"
+    cookie_ttl_seconds = 7200
+  }
+
   droplet_ids = digitalocean_droplet.discourse_ha[*].id
 }
