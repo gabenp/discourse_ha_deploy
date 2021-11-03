@@ -6,3 +6,20 @@ resource "digitalocean_database_cluster" "discourse" {
   region     = "nyc1"
   node_count = 2
 }
+
+resource "digitalocean_database_firewall" "discourse" {
+  cluster_id = digitalocean_database_cluster.discourse.id
+
+  dynamic "rule" {
+    for_each = toset(digitalocean_droplet.discourse_ha[*].ipv4_address)
+    content {
+      type  = "ip_addr"
+      value = rule.value
+    }
+  }
+}
+
+resource "digitalocean_database_user" "discourse" {
+  cluster_id = digitalocean_database_cluster.discourse.id
+  name       = "discourse"
+}
