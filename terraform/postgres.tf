@@ -11,9 +11,9 @@ resource "digitalocean_database_firewall" "discourse" {
   cluster_id = digitalocean_database_cluster.discourse.id
 
   dynamic "rule" {
-    for_each = toset(digitalocean_droplet.discourse_ha[*].ipv4_address)
+    for_each = toset(digitalocean_droplet.discourse_ha[*].id)
     content {
-      type  = "ip_addr"
+      type  = "droplet"
       value = rule.value
     }
   }
