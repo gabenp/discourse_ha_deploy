@@ -15,7 +15,7 @@ write_files:
       CREATE EXTENSION hstore;
       CREATE EXTENSION pg_trgm;
 
-  - path: /tmp/standalone-no-postgres.yml 
+  - path: /tmp/standalone-no-postgres.yml
     permissions: '0644'
     content: |
       templates:
@@ -26,7 +26,7 @@ write_files:
         - "80:80"   # http
         - "443:443" # https
       params:
-        # We need to do this below as seen in `run` to checkout a specific tag/commit
+        # We need to do this below as seen in `hooks.after_code` to checkout a specific tag/commit
         # see: https://meta.discourse.org/t/shallow-git-fetch-regression-in-discourse-docker/172324/18
         # version: v2.8.0.beta7
       env:

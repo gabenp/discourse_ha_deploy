@@ -20,4 +20,8 @@ resource "digitalocean_droplet" "discourse_ha" {
       discourse_db_user     = digitalocean_database_user.discourse.name
       discourse_db_pass     = digitalocean_database_user.discourse.password
   })
+  # To allow easier application of other resources first:
+  #lifecycle {
+  #  ignore_changes = [user_data]
+  #}
 }
