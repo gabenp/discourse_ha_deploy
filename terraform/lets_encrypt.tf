@@ -14,6 +14,9 @@ resource "digitalocean_record" "test" {
 resource "digitalocean_certificate" "test-cert" {
   name    = "test-le-cert"
   type    = "lets_encrypt"
+  // If you try to reference the digitalocean_record resource here, you end up with this cyclical error:
+  // Error: Cycle: digitalocean_certificate.test-cert, digitalocean_loadbalancer.test-le-lb, digitalocean_record.test
+  // Just pass hardcoded string instead here.
   domains = ["static.test.gabe.tech"]
 
   lifecycle {
